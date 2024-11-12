@@ -211,7 +211,7 @@ class TransactionState(StatesGroup):
 @dp.message(Command("add_subscription"))
 async def add_subscription(message: types.Message):
     # Укажите ваш Telegram user_id
-    admin_user_id = 1867377574  # Ваш личный user_id
+    admin_user_id = int(os.getenv("Acc_id"))  # Ваш личный user_id
 
     # Проверка, является ли отправитель сообщения вами (администратором)
     if message.from_user.id != admin_user_id:
@@ -268,7 +268,7 @@ async def add_subscription(message: types.Message):
 @dp.message(Command("remove_subscription"))
 async def remove_subscription(message: types.Message):
     # Укажите ваш Telegram user_id
-    admin_user_id = 1867377574  # Ваш личный user_id
+    admin_user_id = int(os.getenv("Acc_id"))  # Ваш личный user_id
 
     # Проверка, является ли отправитель сообщения вами (администратором)
     if message.from_user.id != admin_user_id:
