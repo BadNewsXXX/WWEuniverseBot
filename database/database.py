@@ -7,11 +7,14 @@ from sqlalchemy import Column, Integer, DateTime, String, BigInteger, Float, For
 from sqlalchemy import select
 from sqlalchemy import text
 from sqlalchemy.orm import relationship
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 
 # Создание базы данных
-DATABASE_URL = "postgresql+asyncpg://postgres:bmw090501@localhost/subscriptions_db"
+DATABASE_URL = os.getenv("DATABASE_URL")
 # Создаем асинхронный движок
 engine = create_async_engine(DATABASE_URL, echo=True)
 # Создаем асинхронную сессию
@@ -19,7 +22,7 @@ async_session = async_sessionmaker(bind=engine, expire_on_commit=False, class_=A
 # Создаем базовый класс для моделей
 Base = declarative_base()
 
-CHANNEL_ID = -1002321323773
+CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
 
 # Модель для таблицы пользователей
 class UserSubscription(Base):
