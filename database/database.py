@@ -458,7 +458,25 @@ async def get_subscription(user_id: BigInteger):
                 print(f"Error during DB query execution: {e}")
                 return None
                        
+async def provide_productStars(user_id: int, months: int):
+    # Логика предоставления продукта и активации подписки
+    async with async_session() as session:
+        user = await session.scalar(select(UserSubscription).where(UserSubscription.user_id == user_id))
+        if not user:
+            # Если пользователя нет в базе, создаём новую запись
+            new_subscription = UserSubscription(
+                user_id=user_id,
+                subscription_start=datetime.now(timezone.utc),
+                subscription_end=datetime.now(timezone.utc) + timedelta(days=30 * months)
+            )
+            session.add(new_subscription)
+        else:
+            # Продлеваем подписку
+            user.subscription_end += timedelta(days=30 * months)
 
+        await session.commit()
 
+    result = await m.bot.create_chat_invite_link(CHANNEL_ID, member_limit=1)
+    return f"Your subscription is active for {months} month(s). Here is your link: {result.invite_link}"
 
 
