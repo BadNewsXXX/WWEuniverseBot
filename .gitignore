@@ -1,0 +1,56 @@
+# Исключаем файл .env с ключами
+.env
+env/
+*.env
+
+# Исключаем виртуальные окружения (например, для Python)
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Исключаем файлы IDE (например, для PyCharm)
+.idea/
+.vscode/
+
+# Исключаем логи и временные файлы
+*.log
+*.tmp
+
+# Visual Studio Code specific
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Игнорируем папку __pycache__ во всей структуре
+**/__pycache__/
+**/*.pyc
+
+# Игнорируем файл базы данных, если он создается, например, как SQLite
+*.db
+*.sqlite3
+
+# Оставляем нужные файлы
+!database/database.py
+!database/models.py
+!database/requests.py
